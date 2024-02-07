@@ -507,7 +507,6 @@ app.post("/guardarPuntuacion", (req, res) => {
     if (err) throw err;
     if (result.length > 0) {
       const idEstudiante = result[0].ID_ESTUDIANTE;
-      console.log("idEstudiante: ", idEstudiante);
 
       db.query(
         insertQueryLectura,
@@ -517,7 +516,6 @@ app.post("/guardarPuntuacion", (req, res) => {
             console.log(err);
           } else {
             res.send({ success: true, message: "Puntuación guardada" });
-            console.log("Lectura guardada");
 
             db.query(
               selectQueryIDLectura,
@@ -531,11 +529,9 @@ app.post("/guardarPuntuacion", (req, res) => {
                   });
                 }
 
-                console.log("Resultado de MAX(ID_LECTURA):", result);
 
                 if (result.length > 0 && result[0].lastId !== null) {
                   const idLectura = result[0].lastId;
-                  console.log("idLectura: ", idLectura);
 
                   db.query(
                     insertQueryPuntuacion,
@@ -549,9 +545,7 @@ app.post("/guardarPuntuacion", (req, res) => {
                     (err) => {
                       if (err) {
                         console.log(err);
-                      } else {
-                        console.log("Pregunta guardada");
-                      }
+                      } 
                     }
                   );
                 }
